@@ -1,5 +1,4 @@
 # Wordle Bot
-from ctypes.wintypes import WORD
 import requests
 from bs4 import BeautifulSoup
 import random as rd
