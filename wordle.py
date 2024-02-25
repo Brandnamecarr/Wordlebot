@@ -12,8 +12,8 @@ GAME_URL = "https://www.nytimes.com/games/wordle/index.html"
 
 # Logging Messages
 # .debug, .info, .warning, .error, .critical
-log.basicConfig(filename = 'wordlebot.log', filemode = 'a', format = '%(name)s - %(levelname)s - %(message)s')
-log.basicConfig(level = log.INFO)
+log.basicConfig(filename = 'wordlebot.log', filemode = 'a', format = '%(levelname)s - %(message)s')
+log.basicConfig(level = log.DEBUG)
 
 # initalize the wordbank.
 def initWordbank():
