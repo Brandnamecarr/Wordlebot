@@ -1,6 +1,0 @@
-
-Process:
-
-1. Navigate to the correct HTML tag on the wordle website (using requests/bs4).
-2. Put a 'first guess' word in the correct attributes (using pyautogui).
-3. Get result from HTML, validate, and repeat!

@@ -15,6 +15,12 @@ def writeToTestFile(filename):
             s = ""
             counter = counter + 1
 
+def writeToFile(filename, message=None):
+    with open(filename, "a+") as file:
+        s = f"{message}\n"
+        file.write(s)
+        s=""
+
 # function loads all the words into the WORD_BANK list from the file.
 def initLoad():
     with open("wordbank.txt", 'r') as file:
@@ -22,7 +28,7 @@ def initLoad():
             line = line.rstrip()        # strips word of newline.
             line = line.upper()         # capitalizes everyone.
             WORD_BANK.append(line)
-    WORD_BANK.sort()
+    WORD_BANK.sort() #alphabetize. :) 
 
 #generate some fake values for the CORRECT_WORD list.
 def testInitCorrectWord():
@@ -40,34 +46,35 @@ def removeFromList():
     # Base Case: if the dictionary is length 0
     if len(WORD_BANK) == 0:
         return 
-    
-    # Parse the word_bank and remove any words that don't contain the letters at the correct index.
-    letter = CORRECT_WORD[0][1]
-    index = CORRECT_WORD[0][0] - 1
-    print("Going to remove {} from {}".format(letter, index))
+    print(len(CORRECT_WORD))
 
-    for word in TEST_BANK:
-        if word[index] != letter:
-            TEST_BANK.remove(word)
-    print(TEST_BANK)
+    finished = False
+    i = len(CORRECT_WORD)
+    j = 0
+    while finished != True:
+        index = CORRECT_WORD[j][0] - 1
+        letter = CORRECT_WORD[j][1]
+        #writeToFile("letter_checking.txt", f"index:{index} and letter:{letter}")
+        for word in WORD_BANK:
+            if word[index] != letter:
+                writeToFile("removals.txt", f"{word[index]} != {letter}")
+                WORD_BANK.remove(word)
+                writeToFile("removals.txt", f"removed {word} from WORD_BANK.")
+        i = i - 1
+        j = j + 1
+        if i == 0:
+            finished = True
+    print("AFTER REMOVALS:")
+    writeToTestFile("removal1.txt")
+    print(len(WORD_BANK))
 
 # CORRECT: GRIPS
 # CORRECT_WORD: G R I T S
 
 def main():
-    print("Is it running?")
-    # initializing our correct word.
-    CORRECT_WORD.append((1, 'G'))
-    CORRECT_WORD.append((2, 'R'))
-    CORRECT_WORD.append((3, 'I'))
-    CORRECT_WORD.append((5, 'S'))
-    TEST_BANK.append("TESTS")
-    TEST_BANK.append("GRIPS")
-    TEST_BANK.append("GRITS")
-    TEST_BANK.append("GREPS")
-    TEST_BANK.append("GREAT")
-    TEST_BANK.append("PESTS")
-    #testInitCorrectWord()
+    WORD_BANK = initLoad()
+    print("Length of wordbank {}".format(len(WORD_BANK)))
+    testInitCorrectWord()
     removeFromList()
 
 main()
