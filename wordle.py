@@ -12,6 +12,15 @@ INCORRECT_LETTERS = []
 GAME_URL = "https://www.nytimes.com/games/wordle/index.html"
 
 
+def getWordBank():
+    return WORD_BANK
+def setWordBank(new_bank: list):
+    WORD_BANK = new_bank
+def getCorrectWord():
+    return CORRECT_WORD
+def setCorrectWord(newStr: str):
+    CORRECT_WORD = newStr
+
 # initalize the wordbank.
 def initWordbank():
     try:
@@ -52,7 +61,7 @@ def validateResults(guess_string):
 def removeFromWordBank(letter: str, index: int):
     current_size = 0
     try:
-        current_size = len(WORD_BANK)
+        current_size = len(getWordBank())
         log.debug("removeFromWordBank() -> {} words before removal.".format(len(WORD_BANK)))
     except:
         log.error("removeFromWordBank() -> error getting length from WORD_BANK")
@@ -72,11 +81,12 @@ def removeFromWordBank(letter: str, index: int):
     log.debug("removeFromWordBank() -> {} words after removal.".format(len(WORD_BANK)))
     
 def clear_logs():
-    if os.path.exists("./wordlebot.log"):
-        os.remove("./wordlebot.log")
-        log.info("CLEANED UP LOG FILE")
+    if os.path.exists("wordlebot.log"):
+        os.remove("wordlebot.log")
+        #log.info("CLEANED UP LOG FILE")
     else:
-        log.error("COULDN'T FIND LOG FILE")
+        #log.error("COULDN'T FIND LOG FILE")
+        pass
 
 def play():
     
